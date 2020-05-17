@@ -13,7 +13,7 @@ class Word2Vec(nn.Module):
         self.embed_model.weight.data.uniform_(-0.5 / self.num_emb, 0.5 / self.num_emb)
 
         self.neighbor_embed = nn.Embedding(self.num_vocab, self.num_emb)
-        self.neighbor_embed.weight.data.uniform_(-0, 0)
+        self.neighbor_embed.weight.data.uniform_(-0.1, 0.1)
 
 
     def forward(self, words):

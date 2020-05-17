@@ -1,5 +1,5 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.getcwd())))
@@ -10,9 +10,6 @@ from losses import NegativeSamplingLoss
 
 import torch
 from torch import optim
-
-from sklearn.manifold import TSNE
-import matplotlib.pyplot as plt
 
 
 def main(device):

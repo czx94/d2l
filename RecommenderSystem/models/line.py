@@ -10,22 +10,32 @@ class LINE(nn.Module):
         self.cfg = cfg
         self.order = cfg.LINE.ORDER
 
-        self.num_vertices = len(graph)
+        self.num_vertexs = graph.number_of_nodes()
         self.embedding_size = self.cfg.WORD2VEC.EMBEDDING_SIZE
 
         self.embeddings = nn.ModuleDict()
-        self.embeddings["first"] = nn.Embedding(self.num_vertices, self.embedding_size)
-        self.embeddings["second"] = nn.Embedding(self.num_vertices, self.embedding_size)
-        self.embeddings["context"] = nn.Embedding(self.num_vertices, self.embedding_size)
+        self.embeddings["first"] = nn.Embedding(self.num_vertexs, self.embedding_size)
+        self.embeddings["second"] = nn.Embedding(self.num_vertexs, self.embedding_size)
+        self.embeddings["context"] = nn.Embedding(self.num_vertexs, self.embedding_size)
         self.embedding_table = dict()
         
         self._init_model()
+        self._vertex_index_mapping()
+
+    def _vertex_index_mapping(self):
+        self.v2index = {}
+        self.index2v = {}
+        for ind, key in enumerate(list(self.graph.nodes())):
+            self.v2index[key] = ind
+            self.index2v[ind] = key
 
     def _init_model(self):
         for m in self.modules():
             if isinstance(m, nn.Embedding):
-                m.weight.data.uniform_(-1, 1)
+                m.weight.data.uniform_(-0.05, 0.05)
 
+    def get_mapping(self):
+        return self.v2index, self.index2v
 
     def get_embedding(self):
         if self.order == "first":
@@ -35,7 +45,7 @@ class LINE(nn.Module):
         else:
             weight = torch.cat([self.embeddings["first"].weight, self.embeddings["second"].weight], dim=1)
 
-        for v, ind in self.graph.v2index.items():
+        for v, ind in self.v2index.items():
             self.embedding_table[v] = weight[ind].detach().cpu().numpy()
 
         return self.embedding_table

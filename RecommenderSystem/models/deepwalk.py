@@ -27,11 +27,8 @@ class DeepWalk(object):
     def get_embedding(self):
         if not self.embedding_table:
             if self.model:
-                for v in self.walker.graph.get_vertexs():
+                for v in self.walker.graph.nodes():
                     self.embedding_table[v] = self.model.wv[v]
-
-        import pdb
-        pdb.set_trace()
 
         return self.embedding_table
 

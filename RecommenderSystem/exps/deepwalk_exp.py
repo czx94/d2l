@@ -3,8 +3,9 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.getcwd())))
 
 import argparse
+import networkx
 
-from utils import Graph, eval_embedding, vis_embedding, create_logger
+from utils import eval_embedding, vis_embedding, create_logger
 from models import DeepWalk
 from configs import cfg
 
@@ -34,7 +35,7 @@ def main():
     logger, log_path = create_logger(cfg)
     logger.info(cfg)
 
-    graph = Graph(cfg.DATA.GRAPH_PATH)
+    graph = networkx.read_edgelist(cfg.DATA.GRAPH_PATH, create_using=networkx.DiGraph(), nodetype=None, data=[('weight', int)])
     model = DeepWalk(graph, cfg, logger)
 
     model.train()

@@ -1,15 +1,16 @@
-import os
-import torch
-import random
-
-import numpy as np
-import matplotlib.pyplot as plt
-
 from sklearn.manifold import TSNE
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score, accuracy_score
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.preprocessing import MultiLabelBinarizer
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+import os
+import torch
+import random
+
 
 def cosine_similarity(embedding, targets=[], device='cpu'):
     """ Returns the cosine similarity of validation words with words in the embedding matrix.
@@ -65,7 +66,7 @@ def vis_embedding(embedding, label_path, log_path):
     for c, idx in color_idx.items():
         plt.scatter(vertice_pos[idx, 0], vertice_pos[idx, 1], label=c)
     plt.legend()
-    plt.savefig(os.path.join(log_path, "deepwalk_sim.png"))
+    plt.savefig(os.path.join(log_path, "clusters.png"))
 
 
 def read_vertices_label(path):

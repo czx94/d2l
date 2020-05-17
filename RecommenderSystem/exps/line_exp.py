@@ -1,12 +1,12 @@
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.getcwd())))
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 import argparse
 import torch
 
-from utils import Graph, eval_embedding, vis_embedding, create_logger, Sampler
+from utils import eval_embedding, vis_embedding, create_logger, Sampler
 from models import LINE
 from configs import cfg
 from losses import KLLoss
@@ -39,10 +39,11 @@ def main(device):
     logger, log_path = create_logger(cfg)
     logger.info(cfg)
 
-    graph = Graph(cfg.DATA.GRAPH_PATH)
-    sampler = Sampler(graph, batch_size=cfg.SAMPLE.BATCHSIZE)
-
+    graph = networkx.read_edgelist(cfg.DATA.GRAPH_PATH, create_using=networkx.DiGraph(), nodetype=None, data=[('weight', int)])
     model = LINE(graph, cfg).to(device)
+    v2ind, ind2v = model.get_mapping()
+    sampler = Sampler(graph, v2ind, batch_size=cfg.SAMPLE.BATCHSIZE)
+
     criterion = KLLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=cfg.WORD2VEC.LR)
 
