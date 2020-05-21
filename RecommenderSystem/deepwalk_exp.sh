@@ -1,1 +1,0 @@
-python3 exps/deepwalk_exp.py --config-file './configs/yamls/deepwalk_baseline.yaml'
