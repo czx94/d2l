@@ -1,0 +1,12 @@
+EXP:
+  NAME: "line_exp"
+
+WORD2VEC:
+  EMBEDDING_SIZE: 128
+  EPOCH: 150
+
+SAMPLE:
+  BATCHSIZE: 256
+
+LINE:
+  ORDER: "second"

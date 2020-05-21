@@ -1,0 +1,1 @@
+python3 exps/sdne_exp.py --config-file './configs/yamls/sdne_baseline.yaml'

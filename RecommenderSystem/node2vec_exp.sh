@@ -1,0 +1,1 @@
+python3 exps/node2vec_exp.py --config-file './configs/yamls/node2vec_baseline.yaml'

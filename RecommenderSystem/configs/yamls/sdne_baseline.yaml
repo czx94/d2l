@@ -1,0 +1,10 @@
+EXP:
+  NAME: "sdne_exp"
+
+WORD2VEC:
+  EPOCH: 300
+
+SDNE:
+  ALPHA: 1e-6
+  BETA: 5
+  L2: 1e-4
