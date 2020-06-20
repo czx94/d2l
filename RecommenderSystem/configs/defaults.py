@@ -12,6 +12,7 @@ _C.DATA = CN()
 _C.DATA.GRAPH_PATH = "./data/wiki/Wiki_edgelist.txt"
 _C.DATA.LABEL_PATH = "./data/wiki/wiki_labels.txt"
 _C.DATA.CATGORY_PATH = "./data/wiki/Wiki_category.txt"
+_C.DATA.PKLS = "./data/pkls"
 
 _C.SAMPLE = CN()
 _C.SAMPLE.SEQUENCE_LENGTH = 10
@@ -40,5 +41,11 @@ _C.SDNE.LAYERS = [256, 128]
 _C.SDNE.ALPHA = 1e-5
 _C.SDNE.BETA = 3
 _C.SDNE.L2 = 1e-2
+
+_C.STRUCT2VEC = CN()
+_C.STRUCT2VEC.OPT1 = True
+_C.STRUCT2VEC.OPT2 = True
+_C.STRUCT2VEC.LAYERS = 5
+
 
 

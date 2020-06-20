@@ -1,0 +1,10 @@
+EXP:
+  NAME: "struct2vec_exp"
+
+DATA:
+  GRAPH_PATH: "./data/flight/brazil-airports.edgelist"
+  LABEL_PATH: "./data/flight/labels-brazil-airports.txt"
+
+SAMPLE:
+  SEQUENCE_LENGTH: 10
+  NUM_SEQUENCE: 100
